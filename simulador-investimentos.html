@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Investimentos | FinançaFácil</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">FinançaFácil</div>
+        <nav class="nav-menu">
+            <a href="index.html">Início</a>
+            <a href="calculadoras.html">Calculadoras</a>
+            <a href="aprenda.html">Aprenda</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </header>
+
+    <section class="banner">
+        <h1>Calculadora de Juros Compostos</h1>
+        <p>Veja como seu dinheiro pode crescer ao longo do tempo</p>
+    </section>
+
+    <section class="why-section" style="max-width: 600px; margin: 0 auto 40px;">
+        <h2>Simule seus investimentos</h2>
+
+        <form>
+            <div style="margin-bottom: 20px;">
+                <label for="valor-inicial" style="display: block; margin-bottom: 5px;">Valor inicial (R$):</label>
+                <input type="number" id="valor-inicial" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #BDBDBD;">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="aporte-mensal" style="display: block; margin-bottom: 5px;">Aporte mensal (R$):</label>
+                <input type="number" id="aporte-mensal" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #BDBDBD;">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="taxa" style="display: block; margin-bottom: 5px;">Taxa de juros anual (%):</label>
+                <input type="number" step="0.1" id="taxa" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #BDBDBD;">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="periodo" style="display: block; margin-bottom: 5px;">Período (anos):</label>
+                <input type="number" id="periodo" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #BDBDBD;">
+            </div>
+
+            <button type="button" class="btn-primary" style="width: 100%;">Simular</button>
+        </form>
+
+        <div id="resultado-juros" style="margin-top: 30px; padding: 20px; background-color: #E8F5E9; border-radius: 5px; display: none;">
+            <h3>Resultado da Simulação</h3>
+            <p>Após <strong>X anos</strong>, seu investimento valerá <strong>R$ X,XX</strong>.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>FinançaFácil</h3>
+                <p>Educação financeira acessível para todos</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contato</h3>
+                <a href="mailto:contato@financafacil.com">contato@financafacil.com</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Navegação</h3>
+                <a href="index.html">Início</a>
+                <a href="calculadoras.html">Calculadoras</a>
+                <a href="aprenda.html">Aprenda</a>
+                <a href="contato.html">Contato</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Siga-nos</h3>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            © 2025 FinançaFácil - Todos os direitos reservados
+        </div>
+    </footer>
+</body>
+</html>
