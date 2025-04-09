@@ -3,6 +3,10 @@ Grupo: Falta de educação financeira
 Membros: Guilherme; Daniel; Lucas; Enzo; Gabriel;
 
 
+// PDF de ARTEFATOS //
+
+[Tiaw.pdf](https://github.com/user-attachments/files/19675406/Tiaw.pdf)
+
 // PDF de DOCUMENTAÇÃO //
 
 [DocumentaçãoTIAW.pdf](https://github.com/user-attachments/files/19675236/DocumentacaoTIAW.pdf)
