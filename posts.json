@@ -1,0 +1,127 @@
+{
+  "Investimentos": [
+    {
+      "id": 10001,
+      "titulo": "Conquista: dívidas quitadas e primeiros investimentos!",
+      "conteudo": "<p><b>@jufinanças</b> Depois de 3 anos estudando educação financeira, finalmente consegui quitar todas as minhas dívidas e começar a investir! 🎉</p>\n<p>Minha estratégia foi focar primeiro em organizar meu orçamento, depois criar uma reserva de emergência e só então começar a investir. Aprendi que tentar investir sem ter o básico organizado é como construir casa na areia.</p>\n<p>Se alguém quiser dicas de como sair das dívidas, estou à disposição para compartilhar o que funcionou para mim!</p>",
+      "autor": "Juliana Souza",
+      "usuario": "@jufinancas",
+      "foto": "https://randomuser.me/api/portraits/women/68.jpg",
+      "data": "2025-06-14T09:30:00.000Z",
+      "curtidas": 33,
+      "comentarios": 4,
+      "tags": ["Dívidas", "Orçamento", "Investimentos"],
+      "midia": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=400&q=80"
+    },
+    {
+      "id": 10002,
+      "titulo": "Como começar a investir com pouco dinheiro?",
+      "conteudo": "Alguém já começou investindo com menos de R$100? Quais plataformas e produtos vocês recomendam para iniciantes?",
+      "autor": "Lucas Pereira",
+      "usuario": "@lucaspereira",
+      "foto": "https://randomuser.me/api/portraits/men/77.jpg",
+      "data": "2025-06-14T09:45:00.000Z",
+      "curtidas": 7,
+      "comentarios": 2,
+      "tags": ["Investimentos", "Iniciantes"],
+      "midia": ""
+    },
+    {
+      "id": 10003,
+      "titulo": "Dica: Automatize seus aportes mensais!",
+      "conteudo": "Uma das melhores formas de criar disciplina é programar transferências automáticas para sua corretora todo mês. Assim, você investe antes de gastar!",
+      "autor": "Marcos Lima",
+      "usuario": "@marcoslima",
+      "foto": "https://randomuser.me/api/portraits/men/45.jpg",
+      "data": "2025-06-14T09:00:00.000Z",
+      "curtidas": 19,
+      "comentarios": 3,
+      "tags": ["Dica", "Disciplina", "Investimentos"],
+      "midia": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=400&q=80"
+    }
+  ],
+  "Orçamento": [
+    {
+      "id": 10004,
+      "titulo": "Como controlar gastos com cartão?",
+      "conteudo": "Alguém recomenda apps ou métodos para não perder o controle do cartão de crédito?",
+      "autor": "Bruno Souza",
+      "usuario": "@brunosouza",
+      "foto": "https://randomuser.me/api/portraits/men/65.jpg",
+      "data": "2025-06-14T09:55:00.000Z",
+      "curtidas": 7,
+      "comentarios": 1,
+      "tags": ["Cartão de Crédito", "Orçamento"],
+      "midia": ""
+    },
+    {
+      "id": 10005,
+      "titulo": "Dica visual: Use planilhas para organizar seu orçamento",
+      "conteudo": "Planilhas ajudam a visualizar para onde seu dinheiro está indo. Recomendo usar Google Sheets ou Excel para acompanhar receitas e despesas.",
+      "autor": "Ana Paula",
+      "usuario": "@anapaula",
+      "foto": "https://randomuser.me/api/portraits/women/44.jpg",
+      "data": "2025-06-14T09:10:00.000Z",
+      "curtidas": 15,
+      "comentarios": 2,
+      "tags": ["Dica", "Planilha", "Orçamento"],
+      "midia": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=facearea&w=400&q=80"
+    }
+  ],
+  "Mercado": [
+    {
+      "id": 10006,
+      "titulo": "Ibovespa em alta: e agora?",
+      "conteudo": "O índice subiu forte essa semana. Vocês acham que é hora de realizar lucro ou segurar?",
+      "autor": "Fernanda Lima",
+      "usuario": "@fernandalima",
+      "foto": "https://randomuser.me/api/portraits/women/12.jpg",
+      "data": "2025-06-14T08:00:00.000Z",
+      "curtidas": 15,
+      "comentarios": 3,
+      "tags": ["Ibovespa", "Mercado"],
+      "midia": ""
+    },
+    {
+      "id": 10007,
+      "titulo": "Dica: Acompanhe notícias do mercado",
+      "conteudo": "Estar informado sobre o mercado financeiro faz diferença nas decisões de investimento. Recomendo o app Investing e o site InfoMoney para acompanhar as principais notícias.",
+      "autor": "Rafael Torres",
+      "usuario": "@rafaeltorres",
+      "foto": "https://randomuser.me/api/portraits/men/23.jpg",
+      "data": "2025-06-14T07:20:00.000Z",
+      "curtidas": 11,
+      "comentarios": 1,
+      "tags": ["Dica", "Mercado"],
+      "midia": "https://images.unsplash.com/photo-1515168833906-d2a3b82b302b?auto=format&fit=facearea&w=400&q=80"
+    }
+  ],
+  "Dúvidas": [
+    {
+      "id": 10008,
+      "titulo": "Como declarar FIIs no IR?",
+      "conteudo": "Primeira vez declarando FIIs no Imposto de Renda. Alguma dica prática?",
+      "autor": "Carlos Silva",
+      "usuario": "@carlossilva",
+      "foto": "https://randomuser.me/api/portraits/men/32.jpg",
+      "data": "2025-06-14T09:50:00.000Z",
+      "curtidas": 4,
+      "comentarios": 0,
+      "tags": ["IR", "FIIs"],
+      "midia": ""
+    },
+    {
+      "id": 10009,
+      "titulo": "Dica: Use apps para organizar seus investimentos",
+      "conteudo": "Aplicativos como Kinvo, Real Valor e Mobills ajudam a acompanhar sua carteira e evolução patrimonial.",
+      "autor": "Patrícia Gomes",
+      "usuario": "@patriciagomes",
+      "foto": "https://randomuser.me/api/portraits/women/36.jpg",
+      "data": "2025-06-14T07:00:00.000Z",
+      "curtidas": 9,
+      "comentarios": 2,
+      "tags": ["Dica", "Apps", "Investimentos"],
+      "midia": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=facearea&w=400&q=80"
+    }
+  ]
+}

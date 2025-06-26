@@ -1,14 +1,20 @@
-// Funções utilitárias para Local Storage
+// dicas.js - Funções utilitárias e manipulação de dicas financeiras
+
+// Função para salvar o objeto de dicas no localStorage
 function salvarDicas() {
+    // Serializa o objeto dicas e salva no armazenamento local do navegador
     localStorage.setItem('dicas', JSON.stringify(dicas));
 }
+
+// Função para carregar dicas do localStorage, se houver
 function carregarDicas() {
     const dicasLS = localStorage.getItem('dicas');
     if (dicasLS) {
         try {
-            dicas = JSON.parse(dicasLS);
+            dicas = JSON.parse(dicasLS); // Tenta restaurar dicas salvas
         } catch (e) {
-            localStorage.removeItem('dicas'); // Remove o dado corrompido
+            // Se houver erro, remove o dado corrompido e restaura padrão
+            localStorage.removeItem('dicas');
             dicas = {
                 "Juros": [
                     { id: 1, titulo: "Entenda a Taxa de Juros", descricao: "A taxa de juros influencia diretamente no custo do crédito e no retorno dos investimentos." },
@@ -36,7 +42,7 @@ function carregarDicas() {
     }
 }
 
-// Estado global para as dicas financeiras organizadas pelas novas categorias
+// Estado global para as dicas financeiras organizadas por categoria
 let dicas = {
     "Juros": [
         { id: 1, titulo: "Entenda a Taxa de Juros", descricao: "A taxa de juros influencia diretamente no custo do crédito e no retorno dos investimentos." },
@@ -60,13 +66,11 @@ let dicas = {
     ]
 };
 
-// Função para renderizar as dicas
+// Função para renderizar as dicas na tela, filtrando por categoria se necessário
 function renderDicas(categoria = 'todos') {
     const container = document.getElementById("tips-container");
     container.innerHTML = ""; // Limpa o conteúdo anterior
-
     let dicasExibidas = [];
-
     if (categoria === 'todos') {
         // Exibe 3 dicas por categoria
         Object.keys(dicas).forEach(categoria => {
@@ -76,12 +80,11 @@ function renderDicas(categoria = 'todos') {
         // Exibe 3 dicas da categoria selecionada
         dicasExibidas = dicas[categoria].slice(0, 3);
     }
-
     if (dicasExibidas.length === 0) {
         container.innerHTML = '<p class="text-muted">Nenhuma dica encontrada para esta categoria.</p>';
     }
-
     dicasExibidas.forEach(dica => {
+        // Cria um card visual para cada dica
         const card = document.createElement("div");
         card.className = "dicas-card bg-white p-4 rounded-lg shadow-md hover:shadow-lg";
         card.innerHTML = `
@@ -92,12 +95,12 @@ function renderDicas(categoria = 'todos') {
         `;
         container.appendChild(card);
     });
-    salvarDicas();
+    salvarDicas(); // Atualiza localStorage
 }
 
-// Função para excluir uma dica
+// Função para excluir uma dica por id
 function excluirDica(id) {
-    // Remover a dica do estado global
+    // Remove a dica do estado global em todas as categorias
     Object.keys(dicas).forEach(categoria => {
         dicas[categoria] = dicas[categoria].filter(dica => dica.id !== id);
     });
@@ -108,16 +111,14 @@ function excluirDica(id) {
 // Função para adicionar uma nova dica
 function adicionarDica(titulo, categoria, descricao) {
     const novaDica = {
-        id: Date.now(),
+        id: Date.now(), // Gera id único
         titulo,
         descricao
     };
-
     if (!dicas[categoria]) {
         dicas[categoria] = [];
     }
-
-    // Adiciona a nova dica no início do array para que ela seja exibida
+    // Adiciona a nova dica no início do array
     dicas[categoria].unshift(novaDica);
     salvarDicas();
     renderDicas(); // Atualiza a lista de dicas
@@ -130,12 +131,10 @@ formAddDica.addEventListener("submit", function(e) {
     const titulo = document.getElementById("input-title").value.trim();
     const categoria = document.getElementById("input-category").value.trim();
     const descricao = document.getElementById("input-text").value.trim();
-
     if (!titulo || !categoria || !descricao) {
         alert("Todos os campos são obrigatórios.");
         return;
     }
-
     // Se NÃO estivermos editando, adiciona uma nova dica
     if (!formAddDica.dataset.editando) {
         adicionarDica(titulo, categoria, descricao);
@@ -151,12 +150,10 @@ btnAtualizar.addEventListener("click", function(e) {
     const titulo = document.getElementById("input-title").value.trim();
     const categoria = document.getElementById("input-category").value.trim();
     const descricao = document.getElementById("input-text").value.trim();
-
     if (!titulo || !categoria || !descricao) {
         alert("Todos os campos são obrigatórios.");
         return;
     }
-
     // Somente atualiza se estivermos no modo de edição
     if (formAddDica.dataset.editando) {
         atualizarDica(formAddDica.dataset.editando, titulo, categoria, descricao);
@@ -164,7 +161,7 @@ btnAtualizar.addEventListener("click", function(e) {
     }
 });
 
-// Função para editar uma dica
+// Função para editar uma dica existente
 function editarDica(id) {
     let dicaParaEditar = null;
     let categoriaOriginal = null;
@@ -175,8 +172,8 @@ function editarDica(id) {
             categoriaOriginal = categoria;
         }
     });
-
     if (dicaParaEditar) {
+        // Preenche o formulário com os dados da dica
         document.getElementById("input-title").value = dicaParaEditar.titulo;
         document.getElementById("input-category").value = categoriaOriginal;
         document.getElementById("input-text").value = dicaParaEditar.descricao;
@@ -187,13 +184,12 @@ function editarDica(id) {
     }
 }
 
-// Função para atualizar uma dica
+// Função para atualizar uma dica existente, podendo inclusive trocar de categoria
 function atualizarDica(id, titulo, categoria, descricao) {
     const categoriaOriginal = formAddDica.dataset.categoriaOriginal;
     // Se o campo de categoria estiver vazio ou igual à original, usamos a categoria original
     const novaCategoria = categoria.trim() ? categoria : categoriaOriginal;
     id = Number(id);
-
     if (categoriaOriginal === novaCategoria) {
         // Atualiza em linha sem reposicionar a dica
         const index = dicas[categoriaOriginal].findIndex(dica => dica.id === id);
@@ -233,6 +229,7 @@ categoryButtons.forEach(button => {
 });
 
 // Inicialização ao carregar a página
+// Carrega dicas do localStorage e renderiza na tela
 document.addEventListener("DOMContentLoaded", function() {
     carregarDicas();
     renderDicas();  // Exibe todas as dicas quando a página for carregada

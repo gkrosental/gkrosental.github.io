@@ -1,57 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Metadados e links de dependências externas -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InvestSmart - Simulador de Investimentos</title>
+    <!-- Biblioteca de gráficos -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- Tailwind CSS para utilitários de layout -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Estilos customizados -->
     <link href="styles.css" rel="stylesheet">
+    <!-- Ícones Font Awesome -->
+    <link href="fontawesome.min.css" rel="stylesheet">
+    <!-- Scripts principais da aplicação -->
     <script type="module" src="main.js"></script>
-    <script defer src="educacional.js"></script>
-    <script defer src="dicas.js"></script> <!-- Script das dicas -->
+    <script src="modulos.js"></script>
+    <script src="educacional.js"></script>
+    <script defer src="dicas.js"></script>
 </head>
 <body>
     <div class="flex">
-        <!-- Sidebar -->
+        <!-- Sidebar: Navegação lateral fixa com ícones para cada seção -->
         <aside id="sidebar"
-            class="fixed top-0 left-0 h-full w-20 z-50 flex flex-col items-center py-6 space-y-6 transition-transform duration-300 -translate-x-0 lg:translate-x-0"
-            style="
-                background: linear-gradient(180deg, #101624 0%, #1e293b 60%, #232b3e 100%);
-                box-shadow: 4px 0 24px 0 rgba(0,0,0,0.35);
-                border-right: 2px solid rgba(80,120,255,0.18);
-                backdrop-filter: blur(8px);
-            ">
+            class="fixed top-0 left-0 h-full w-24 z-50 flex flex-col items-center py-6 space-y-8 transition-transform duration-300 -translate-x-0 lg:translate-x-0"
+            style="background: linear-gradient(180deg, #101624 0%, #1e293b 60%, #232b3e 100%); box-shadow: 4px 0 24px 0 rgba(0,0,0,0.35); border-right: 2px solid rgba(80,120,255,0.18); backdrop-filter: blur(8px);">
+            <!-- Botões de navegação SPA, cada um chama mostrarSecao('id') -->
+            <!-- Perfil do usuário -->
+            <button class="flex flex-col items-center group focus:outline-none mb-2" onclick="mostrarSecao('perfil')" title="Perfil do Usuário">
+                <i class="fas fa-user-circle feature-icon glossy-gradient-icon"></i>
+                <span class="feature-title text-xs text-white group-hover:text-blue-200 mt-1">Perfil</span>
+            </button>
+            <!-- Botão para fechar sidebar no mobile -->
             <button class="lg:hidden absolute top-3 right-3 text-white text-2xl focus:outline-none" onclick="document.getElementById('sidebar').classList.toggle('-translate-x-full')">
                 ✕
             </button>
+            <!-- Demais seções: Investimentos, Orçamento, Metas, Extrato, Dicas, Comunidade, Educação, Mercado -->
+            <!-- Cada botão ativa uma seção SPA -->
             <button class="flex flex-col items-center group focus:outline-none" onclick="mostrarSecao('investimentos')">
-                <span class="text-2xl mb-1 group-hover:text-blue-300 transition filter grayscale opacity-80">📊</span>
-                <span class="text-xs text-white group-hover:text-blue-200">Investimentos</span>
+                <i class="fas fa-chart-line feature-icon glossy-gradient-icon"></i>
+                <span class="feature-title text-xs text-white group-hover:text-blue-200 mt-1">Investimentos</span>
             </button>
             <button class="flex flex-col items-center group focus:outline-none" onclick="mostrarSecao('orcamento')">
-                <span class="text-2xl mb-1 group-hover:text-blue-300 transition filter grayscale opacity-80">💳</span>
-                <span class="text-xs text-white group-hover:text-blue-200">Orçamento</span>
+                <i class="fas fa-wallet feature-icon glossy-gradient-icon"></i>
+                <span class="feature-title text-xs text-white group-hover:text-blue-200 mt-1">Orçamento</span>
             </button>
             <button class="flex flex-col items-center group focus:outline-none" onclick="mostrarSecao('metas')">
-                <span class="text-2xl mb-1 group-hover:text-blue-300 transition filter grayscale opacity-80">🎯</span>
-                <span class="text-xs text-white group-hover:text-blue-200">Metas</span>
+                <i class="fas fa-bullseye feature-icon glossy-gradient-icon"></i>
+                <span class="feature-title text-xs text-white group-hover:text-blue-200 mt-1">Metas</span>
             </button>
             <button class="flex flex-col items-center group focus:outline-none" onclick="mostrarSecao('extrato')">
-                <span class="text-2xl mb-1 group-hover:text-blue-300 transition filter grayscale opacity-80">📋</span>
-                <span class="text-xs text-white group-hover:text-blue-200">Extrato</span>
+                <i class="fas fa-receipt feature-icon glossy-gradient-icon"></i>
+                <span class="feature-title text-xs text-white group-hover:text-blue-200 mt-1">Extrato</span>
             </button>
+            <!-- Dicas: leva à seção de dicas financeiras -->
             <button class="flex flex-col items-center group focus:outline-none" onclick="mostrarSecao('dicas')">
-                <span class="text-2xl mb-1 group-hover:text-blue-300 transition filter grayscale opacity-80">💡</span>
-                <span class="text-xs text-white group-hover:text-blue-200">Dicas</span>
+                <i class="fas fa-lightbulb feature-icon glossy-gradient-icon"></i>
+                <span class="feature-title text-xs text-white group-hover:text-blue-200 mt-1">Dicas</span>
+            </button>
+            <!-- Comunidade: leva ao feed de comunidade -->
+            <button class="flex flex-col items-center group focus:outline-none" onclick="mostrarSecao('comunidade')">
+                <i class="fas fa-users feature-icon glossy-gradient-icon"></i>
+                <span class="feature-title text-xs text-white group-hover:text-blue-200 mt-1">Comunidade</span>
             </button>
             <button class="flex flex-col items-center group focus:outline-none" onclick="mostrarSecao('educacao')">
-                <span class="text-2xl mb-1 group-hover:text-blue-300 transition filter grayscale opacity-80">📚</span>
-                <span class="text-xs text-white group-hover:text-blue-200">Educação</span>
+                <i class="fas fa-book-open feature-icon glossy-gradient-icon"></i>
+                <span class="feature-title text-xs text-white group-hover:text-blue-200 mt-1">Educação</span>
             </button>
             <button class="flex flex-col items-center group focus:outline-none" onclick="mostrarSecao('mercado')">
-                <span class="text-2xl mb-1 group-hover:text-blue-300 transition filter grayscale opacity-80">💹</span>
-                <span class="text-xs text-white group-hover:text-blue-200">Mercado</span>
+                <i class="fas fa-chart-bar feature-icon glossy-gradient-icon"></i>
+                <span class="feature-title text-xs text-white group-hover:text-blue-200 mt-1">Mercado</span>
             </button>
         </aside>
         <!-- Botão mobile para abrir sidebar -->
@@ -62,83 +80,105 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
         </button>
-        <!-- Conteúdo principal -->
+        <!-- Área principal de conteúdo SPA -->
         <div class="flex-1 ml-20">
             <div class="container">
-                <header class="header">
+                <!-- Header fixo com logo e informações do usuário -->
+                <header class="header sticky-header">
                     <div class="logo">💎 InvestSmart</div>
                     <div class="user-info">
                         <div class="balance">
                             <div class="balance-label">Patrimônio Total</div>
-                            <div class="balance-value" id="total-balance">R$ 125.430,00</div>
+                            <div class="flex items-center gap-2">
+                                <button id="btn-adicionar-fundos" class="mr-2 px-2 py-1 rounded bg-green-600 hover:bg-green-700 text-white text-xs font-bold">+ Adicionar Fundos</button>
+                                <div class="balance-value" id="total-balance">R$ 0,00</div>
+                            </div>
                         </div>
                     </div>
                 </header>
-
-                <!-- Seção Dicas Financeiras -->
+                <!-- Seção Dicas Financeiras: formulário e exibição de dicas -->
                 <section id="dicas" class="spa-section hidden">
-                    <div class="card">
-                        <div class="card-title flex items-center gap-2">
-                            <span class="icon">💡</span>Dicas para Gerenciar Suas Finanças
+                    <div class="max-w-3xl mx-auto py-8">
+                        <h2 class="text-2xl font-bold mb-6 text-blue-200 flex items-center gap-2"><i class="fas fa-lightbulb"></i> Dicas Financeiras</h2>
+                        <form id="form-add-tip" class="mb-6 bg-gray-800 p-4 rounded-lg shadow flex flex-col gap-4">
+                            <input id="input-title" class="p-2 rounded bg-gray-700 text-white" type="text" placeholder="Título da dica" required>
+                            <input id="input-category" class="p-2 rounded bg-gray-700 text-white" type="text" placeholder="Categoria (ex: Investimentos, Juros...)" required>
+                            <textarea id="input-text" class="p-2 rounded bg-gray-700 text-white" placeholder="Descrição da dica" required></textarea>
+                            <button class="btn bg-blue-600 hover:bg-blue-700 text-white" type="submit">Adicionar Dica</button>
+                            <button id="btn-atualizar" class="btn bg-yellow-500 hover:bg-yellow-600 text-white" type="button" style="display:none;">Atualizar Dica</button>
+                        </form>
+                        <div class="mb-4">
+                            <button class="category-btn btn btn-outline-purple active" data-category="todos">Todos</button>
+                            <button class="category-btn btn btn-outline-purple" data-category="Juros">Juros</button>
+                            <button class="category-btn btn btn-outline-purple" data-category="Criptomoedas">Criptomoedas</button>
+                            <button class="category-btn btn btn-outline-purple" data-category="Tesouro Direto">Tesouro Direto</button>
+                            <button class="category-btn btn btn-outline-purple" data-category="Investimentos">Investimentos</button>
                         </div>
-
-                        <!-- Dicas em Destaque -->
-                        <div class="mt-6">
-                            <h2 class="text-2xl font-semibold">Dicas em Destaque</h2>
-                            <div class="mt-4 bg-gray-100 p-6 rounded-lg shadow-md">
-                                <h3 class="text-xl font-semibold destaque-dica-titulo">Como criar um orçamento pessoal</h3>
-                                <p class="text-gray-700">Aprenda os passos básicos para criar um orçamento pessoal eficiente e controlar seus gastos.</p>
-                                <p class="mt-2 text-sm text-gray-500">Categoria: Orçamento</p>
+                        <div id="tips-container" class="grid gap-4"></div>
+                    </div>
+                </section>
+                <!-- Seção Comunidade: feed de posts, contatos e mensagens -->
+                <section id="comunidade" class="spa-section hidden">
+                    <div class="community-layout">
+                        <aside class="community-sidebar">
+                            <div class="contacts-card bg-gray-900 rounded-2xl shadow-lg p-5 mb-6">
+                                <div class="font-bold text-lg text-blue-200 mb-4 flex items-center gap-2"><i class="fas fa-user-friends"></i> Contatos</div>
+                                <ul id="contacts-list" class="space-y-4"></ul>
                             </div>
-                        </div>
-
-                        <!-- Filtro de Categorias -->
-                        <div class="mt-6">
-                            <span class="mr-2">Filtrar por categoria:</span>
-                            <button class="btn btn-outline-primary category-btn active" data-category="todos">Todas</button>
-                            <button class="btn btn-outline-primary category-btn" data-category="Juros">Juros</button>
-                            <button class="btn btn-outline-primary category-btn" data-category="Criptomoedas">Criptomoedas</button>
-                            <button class="btn btn-outline-primary category-btn" data-category="Tesouro Direto">Tesouro Direto</button>
-                            <button class="btn btn-outline-primary category-btn" data-category="Investimentos">Investimentos</button>
-                        </div>
-
-                        <!-- Lista de Dicas -->
-                        <div id="tips-container" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <!-- As dicas serão carregadas dinamicamente aqui -->
-                        </div>
-
-                        <!-- Adicionar Nova Dica -->
-                        <div class="mt-6">
-                            <h4 class="text-xl font-semibold mb-3">Adicionar Nova Dica</h4>
-                            <form id="form-add-tip" class="flex gap-4 mb-6">
-                                <input type="text" id="input-title" class="form-control border rounded p-2" placeholder="Título" required />
-                                <label for="input-category" class="sr-only">Categoria</label>
-                                <select id="input-category" class="form-select border rounded p-2" required>
-                                    <option value="">Selecione a categoria</option>
-                                    <option value="Juros">Juros</option>
-                                    <option value="Criptomoedas">Criptomoedas</option>
-                                    <option value="Tesouro Direto">Tesouro Direto</option>
-                                    <option value="Investimentos">Investimentos</option>
-                                </select>
-                                <input type="text" id="input-text" class="form-control border rounded p-2" placeholder="Descrição" required />
-                                <button type="submit" class="btn bg-blue-500 hover:bg-blue-600 text-white p-2 rounded">Adicionar</button>
-                                <button type="button" id="btn-atualizar" class="btn bg-green-500 hover:bg-green-600 text-white p-2 rounded hidden-btn" onclick="atualizarDica()">Atualizar</button>
-
-                            </form>
+                            <div class="messages-card bg-gray-900 rounded-2xl shadow-lg p-5">
+                                <div class="font-bold text-lg text-blue-200 mb-4 flex items-center gap-2"><i class="fas fa-envelope"></i> Mensagens</div>
+                                <div id="messages-list" class="space-y-3 text-sm text-gray-200">
+                                    <span class="text-gray-400">Selecione um contato para ver as mensagens.</span>
+                                </div>
+                            </div>
+                        </aside>
+                        <div class="community-feed-area">
+                            <div class="create-post mb-6">
+                                <div class="post-input flex gap-4 mb-4">
+                                    <img src="https://ui-avatars.com/api/?name=Usuário&background=8b5cf6&color=fff" alt="Usuário" class="post-user-avatar w-12 h-12 rounded-full">
+                                    <textarea class="post-input-field flex-1 bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:ring-1 focus:ring-purple-500" placeholder="Compartilhe suas experiências financeiras..." rows="5" style="min-height: 120px; height: 140px;"></textarea>
+                                    <input type="file" accept="image/*" class="post-media-input hidden" />
+                                </div>
+                                <div class="post-actions flex justify-between">
+                                    <div class="post-tools flex gap-4">
+                                        <button class="post-tool text-gray-400 hover:text-purple-400 flex items-center gap-1">
+                                            <i class="fas fa-image"></i> Mídia
+                                        </button>
+                                        <button class="post-tool text-gray-400 hover:text-purple-400 flex items-center gap-1">
+                                            <i class="fas fa-link"></i> Link
+                                        </button>
+                                        <button class="post-tool text-gray-400 hover:text-purple-400 flex items-center gap-1">
+                                            <i class="fas fa-hashtag"></i> Tag
+                                        </button>
+                                    </div>
+                                    <button class="btn bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white px-6 py-2 rounded-lg" type="button">
+                                        Publicar
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <span class="text-gray-400 mr-3">Filtrar por:</span>
+                                <button class="category-filter btn btn-outline-purple active" data-category="todos">Todos</button>
+                                <button class="category-filter btn btn-outline-purple" data-category="Investimentos">Investimentos</button>
+                                <button class="category-filter btn btn-outline-purple" data-category="Orçamento">Orçamento</button>
+                                <button class="category-filter btn btn-outline-purple" data-category="Mercado">Mercado</button>
+                                <button class="category-filter btn btn-outline-purple" data-category="Dúvidas">Dúvidas</button>
+                            </div>
+                            <div id="community-feed" class="space-y-6"></div>
                         </div>
                     </div>
                 </section>
-
-                <!-- Seção Conteúdo Educativo -->
+                <!-- Seção Conteúdo Educativo: trilha de aprendizado -->
                 <section id="educacao" class="spa-section hidden">
-                    <!-- O conteúdo será inserido dinamicamente pelo JavaScript -->
-                      <div id="trilha-educacional"></div>
-                      <div class="mt-4 text-center text-sm text-blue-200">
-                            Complete cada etapa para avançar na trilha. Responda os quizzes para desbloquear o próximo conteúdo!
+                    <div class="max-w-3xl mx-auto py-8">
+                        <h2 class="text-2xl font-bold mb-6 text-blue-200 flex items-center gap-2"><i class="fas fa-book-open"></i> Conteúdo Educativo</h2>
+                        <div id="trilha-educacional"></div>
+                        <div id="educational-content" class="space-y-4">
+                            <!-- Conteúdo dinâmico de educação financeira -->
                         </div>
+                    </div>
                 </section>
-
-                <!-- Seção Investimentos -->
+                <!-- Seção Investimentos: simulador, oportunidades, resumo -->
                 <section id="investimentos" class="spa-section hidden">
                     <div class="main-grid">
                         <div class="card simulator-section">
@@ -193,15 +233,15 @@
                         <div class="card">
                             <div class="card-title"><span class="icon pulse">📈</span>Resumo dos Investimentos</div>
                             <div class="mb-6">
-                                <div class="metric-value" id="totalReturn">R$ 89.420</div>
+                                <div class="metric-value" id="totalReturn">R$ 0,00</div>
                                 <div class="metric-label">Valor Final Projetado</div>
                             </div>
                             <div class="mb-6">
-                                <div class="metric-value" id="totalProfit">R$ 49.420</div>
+                                <div class="metric-value" id="totalProfit">R$ 0,00</div>
                                 <div class="metric-label">Lucro Total</div>
                             </div>
                             <div>
-                                <div class="metric-value" id="profitPercentage">89.4%</div>
+                                <div class="metric-value" id="profitPercentage">0%</div>
                                 <div class="metric-label">Rentabilidade Total</div>
                             </div>
                             <div class="chart-container portfolio-chart-container">
@@ -210,18 +250,17 @@
                         </div>
                     </div>
                 </section>
-
-                <!-- Seção Orçamento -->
+                <!-- Seção Orçamento: controle de orçamento mensal -->
                 <section id="orcamento" class="spa-section hidden">
                     <div class="card mb-6">
                         <div class="card-title flex items-center gap-2"><span class="icon">💳</span>Orçamento Mensal</div>
                         <div class="flex flex-wrap gap-6 items-center">
                             <div id="orcamento-card-digital" class="bg-gradient-to-r from-blue-500 to-green-400 rounded-2xl p-6 shadow-lg flex flex-col items-center w-96 h-52 mb-4 orcamento-card-digital">
                                 <div class="text-lg font-bold mb-2">Cartão Digital</div>
-                                <div class="text-2xl font-mono mb-2" id="orcamento-saldo">R$ 5.000,00</div>
+                                <div class="text-2xl font-mono mb-2" id="orcamento-saldo">R$ 0,00</div>
                                 <div class="flex gap-2 mb-2">
-                                    <button class="btn bg-green-500 hover:bg-green-600" onclick="abrirDeposito()">Depositar</button>
-                                    <button class="btn bg-red-500 hover:bg-red-600" onclick="abrirRetirada()">Retirar</button>
+                                    <button type="button" class="btn bg-green-500 hover:bg-green-600" onclick="abrirDeposito()">Depositar</button>
+                                    <button type="button" class="btn bg-red-500 hover:bg-red-600" onclick="abrirRetirada()">Retirar</button>
                                 </div>
                                 <div class="text-xs opacity-80">Simule movimentações para suas metas</div>
                             </div>
@@ -237,8 +276,7 @@
                         <ul class="divide-y divide-gray-700" id="orcamento-extrato"></ul>
                     </div>
                 </section>
-
-                <!-- Seção Metas -->
+                <!-- Seção Metas: gerenciamento de metas financeiras -->
                 <section id="metas" class="spa-section hidden">
                     <div class="card">
                         <div class="card-title flex items-center gap-2">
@@ -249,19 +287,17 @@
                             <input class="input-group pl-2" type="number" id="nova-meta-valor" placeholder="Valor alvo (R$)" min="1" required>
                             <button class="btn bg-blue-500 hover:bg-blue-600" type="submit">Adicionar Meta</button>
                         </form>
-                        <div class="goals-section" id="goals-previw"></div>
+                        <div class="goals-section" id="goals-preview"></div>
                     </div>
                 </section>
-
-                <!-- Seção Extrato -->
+                <!-- Seção Extrato: extrato geral de movimentações -->
                 <section id="extrato" class="spa-section hidden">
                     <div class="card">
                         <div class="card-title flex items-center gap-2"><span class="icon">📋</span>Extrato Geral</div>
                         <ul class="divide-y divide-gray-700" id="extrato-geral"></ul>
                     </div>
                 </section>
-
-                <!-- Nova seção Mercado -->
+                <!-- Seção Mercado: notícias e cotações -->
                 <section id="mercado" class="spa-section hidden">
                     <!-- Barra de notícias estilo breaking news -->
                     <div class="w-full mb-6">
@@ -301,7 +337,6 @@
                         </div>
                     </div>
                 </section>
-
                 <!-- Modal de Depósito/Retirada de Meta -->
                 <div id="meta-modal-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden"></div>
                 <div id="meta-modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
@@ -316,14 +351,62 @@
                             <div class="mb-2 text-white/80" id="meta-modal-titulo"></div>
                             <form id="meta-modal-form" class="w-full flex flex-col items-center gap-3">
                                 <input type="number" min="1" step="0.01" required placeholder="Valor (R$)" class="rounded-lg px-4 py-2 w-48 text-black focus:outline-none focus:ring-2 focus:ring-blue-400">
-                                <button type="submit" class="btn w-48" id="meta-modal-btn">Confirmar</button>
+                                <button type="button" class="btn w-48" id="meta-modal-btn">Confirmar</button>
                             </form>
                         </div>
+                    </div>
+                </div>
+                <!-- Modal para adicionar fundos ao patrimônio -->
+                <div id="modal-fundos-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden"></div>
+                <div id="modal-fundos" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+                    <div class="bg-[#18182c] rounded-2xl shadow-2xl p-8 w-full max-w-md border border-white/10 flex flex-col items-center relative">
+                        <button id="modal-fundos-close" class="absolute top-3 right-3 text-white text-xl font-bold hover:text-blue-300">&times;</button>
+                        <div class="mb-4 text-lg font-bold text-blue-200">Adicionar Fundos ao Patrimônio</div>
+                        <form id="form-adicionar-fundos" class="w-full flex flex-col items-center gap-3">
+                            <input type="number" min="1" step="0.01" required placeholder="Valor (R$)" class="rounded-lg px-4 py-2 w-48 text-black focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <button type="submit" class="btn w-48 bg-green-600 hover:bg-green-700 text-white">Adicionar</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Seção Perfil: SPA -->
+                <section id="perfil" class="spa-section hidden">
+                    <div id="perfil-dashboard" class="max-w-2xl mx-auto py-10 flex flex-col items-center gap-8">
+                        <!-- Conteúdo dinâmico: login/cadastro ou dashboard -->
+                    </div>
+                </section>
+
+                <!-- Modal de Login -->
+                <div id="modal-login" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
+                    <div class="bg-gray-900 rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
+                        <button class="absolute top-3 right-3 text-white text-2xl font-bold" onclick="fecharModalLogin()">&times;</button>
+                        <h2 class="text-2xl font-bold text-blue-200 mb-6 text-center">Entrar na Plataforma</h2>
+                        <form id="form-login" class="flex flex-col gap-4">
+                            <input id="login-username" class="rounded-lg px-4 py-2 bg-gray-800 text-white" type="text" placeholder="Nome de usuário ou e-mail" required>
+                            <input id="login-password" class="rounded-lg px-4 py-2 bg-gray-800 text-white" type="password" placeholder="Senha" required>
+                            <button class="btn bg-blue-600 hover:bg-blue-700 text-white" type="submit">Entrar</button>
+                        </form>
+                        <div class="mt-4 text-center text-sm text-blue-300">Não tem conta? <a href="#" class="underline" onclick="abrirModalCadastro();fecharModalLogin();return false;">Cadastre-se</a></div>
+                    </div>
+                </div>
+
+                <!-- Modal de Cadastro -->
+                <div id="modal-cadastro" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
+                    <div class="bg-gray-900 rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
+                        <button class="absolute top-3 right-3 text-white text-2xl font-bold" onclick="fecharModalCadastro()">&times;</button>
+                        <h2 class="text-2xl font-bold text-blue-200 mb-6 text-center">Criar Conta</h2>
+                        <form id="form-cadastro" class="flex flex-col gap-4">
+                            <input id="cadastro-username" class="rounded-lg px-4 py-2 bg-gray-800 text-white" type="text" placeholder="Nome de usuário" required>
+                            <input id="cadastro-email" class="rounded-lg px-4 py-2 bg-gray-800 text-white" type="email" placeholder="E-mail" required>
+                            <input id="cadastro-password" class="rounded-lg px-4 py-2 bg-gray-800 text-white" type="password" placeholder="Senha" required>
+                            <button class="btn bg-green-600 hover:bg-green-700 text-white" type="submit">Cadastrar</button>
+                        </form>
+                        <div class="mt-4 text-center text-sm text-blue-300">Já tem conta? <a href="#" class="underline" onclick="abrirModalLogin();fecharModalCadastro();return false;">Entrar</a></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Estilos responsivos e ajustes para mobile -->
     <style>
         @media (max-width: 1023px) {
             #sidebar {

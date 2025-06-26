@@ -1,25 +1,35 @@
 // investimentos.js - Simulação e gráficos de investimentos
+
+// Importa metas do estado global para uso em simulações
 import { metas } from './estado.js';
 
-export let investmentChart = null;
-export let portfolioChart = null;
+// Variáveis globais para armazenar instâncias dos gráficos de investimento
+export let investmentChart = null; // Gráfico de evolução do investimento
+export let portfolioChart = null;  // Gráfico de alocação de portfólio
 
+// Função principal para calcular a simulação de investimento
+// Lê valores do formulário, calcula o valor final, lucro e atualiza gráficos
 export function calcularInvestimento() {
+    // Captura valores do formulário de simulação
     const initialValue = parseFloat(document.getElementById('initialValue').value);
     const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
     const interestRateAnnual = parseFloat(document.getElementById('interestRate').value);
     const periodYears = parseInt(document.getElementById('period').value);
     if (isNaN(initialValue) || isNaN(monthlyContribution) || isNaN(interestRateAnnual) || isNaN(periodYears)) return;
+    // Calcula taxa mensal e meses totais
     const monthlyRate = interestRateAnnual / 100 / 12;
     const months = periodYears * 12;
+    // Fórmula de juros compostos para valor final
     const finalValue = initialValue * Math.pow(1 + monthlyRate, months) +
         monthlyContribution * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
     const investedTotal = initialValue + monthlyContribution * months;
     const profit = finalValue - investedTotal;
     const profitPercentage = ((profit / investedTotal) * 100).toFixed(1);
+    // Atualiza valores na tela
     document.getElementById('totalReturn').textContent = 'R$ ' + finalValue.toLocaleString('pt-BR', { maximumFractionDigits: 2 });
     document.getElementById('totalProfit').textContent = 'R$ ' + profit.toLocaleString('pt-BR', { maximumFractionDigits: 2 });
     document.getElementById('profitPercentage').textContent = profitPercentage + '%';
+    // Atualiza gráfico de evolução do investimento
     if (investmentChart) {
         const yearlyValues = [];
         for (let y = 1; y <= periodYears; y++) {
@@ -32,9 +42,11 @@ export function calcularInvestimento() {
         investmentChart.data.datasets[0].data = yearlyValues;
         investmentChart.update();
     }
+    // Atualiza gráfico de alocação de portfólio
     if (portfolioChart) {
         const investmentType = document.getElementById('investmentType').value;
         let fixed = 0, acoes = 0, fiis = 0, crypto = 0;
+        // Distribuição simulada conforme tipo de investimento
         if (investmentType === 'cdb') {
             fixed = finalValue * 0.70;
             acoes = finalValue * 0.15;
@@ -81,6 +93,8 @@ export function calcularInvestimento() {
     }
 }
 
+// Inicializa os gráficos de linha e pizza usando Chart.js
+// Configura eventos para recalcular ao alterar inputs
 export function initGraficos() {
     const ctx1 = document.getElementById('investmentChart').getContext('2d');
     investmentChart = new Chart(ctx1, {
@@ -168,6 +182,7 @@ export function initGraficos() {
             }
         }
     });
+    // Adiciona listeners para recalcular simulação ao alterar qualquer input relevante
     document.querySelectorAll('#initialValue, #monthlyContribution, #interestRate, #period, #investmentType')
         .forEach(input => input.addEventListener('change', calcularInvestimento));
 }

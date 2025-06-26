@@ -1,7 +1,6 @@
 Documentação referente ao projeto de TIAW
 Grupo: Falta de educação financeira
-Membros: Guilherme; Daniel; Lucas; Enzo; Gabriel;
-
+Membros: Guilherme; Daniel; Lucas;
 
 // PDF de ARTEFATOS //
 
